@@ -4,74 +4,108 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import NewsScreen from '../screens/NewsScreen';
+import CategoryScreen from '../screens/CategoryScreen';
+import ActionScreen from '../screens/ActionScreen';
+import DiscussionScreen from '../screens/DiscussionScreen';
+import MoreScreen from '../screens/MoreScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const NewsStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    News: NewsScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+NewsStack.navigationOptions = {
+  tabBarLabel: 'НОВОСТИ',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+        Platform.OS === 'ios' ? 'ios-home' : 'md-home'
       }
     />
   ),
 };
 
-HomeStack.path = '';
+NewsStack.path = '';
 
-const LinksStack = createStackNavigator(
+const CategoryStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Category: CategoryScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+CategoryStack.navigationOptions = {
+  tabBarLabel: 'СПРАВОЧНИК',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-folder' : 'md-folder'} />
   ),
 };
 
-LinksStack.path = '';
+CategoryStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const ActionStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Action: ActionScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+ActionStack.navigationOptions = {
+  tabBarLabel: 'АКЦИИ',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-refresh' : 'md-refresh'} />
   ),
 };
 
-SettingsStack.path = '';
+ActionStack.path = '';
+
+const DiscussionStack = createStackNavigator(
+  {
+    Discussion: DiscussionScreen,
+  },
+  config
+);
+
+DiscussionStack.navigationOptions = {
+  tabBarLabel: 'ОБСУЖДЕНИЯ',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-chatboxes' : 'md-chatboxes'} />
+  ),
+};
+
+DiscussionStack.path = '';
+
+const MoreStack = createStackNavigator(
+  {
+    More: MoreScreen,
+  },
+  config
+);
+
+MoreStack.navigationOptions = {
+  tabBarLabel: 'Ещё',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-more' : 'md-more'} />
+  ),
+};
+
+MoreStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  NewsStack,
+  CategoryStack,
+  ActionStack,
+  DiscussionStack,
+  MoreStack,
 });
 
 tabNavigator.path = '';
